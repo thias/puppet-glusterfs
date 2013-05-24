@@ -4,23 +4,23 @@
 #
 # Example Usage:
 #  glusterfs::mount { '/var/www':
-#      device => '192.168.12.1:/gv0',
+#    device => '192.168.12.1:/gv0',
 #  }
 #
 define glusterfs::mount (
-    $device,
-    $options = 'defaults',
-    $ensure  = 'mounted'
+  $device,
+  $options = 'defaults',
+  $ensure  = 'mounted'
 ) {
 
-    include glusterfs::client
+  include glusterfs::client
 
-    mount { $title:
-        device  => $device,
-        fstype  => 'glusterfs',
-        options => $options,
-        ensure  => $ensure,
-    }
+  mount { $title:
+    device  => $device,
+    fstype  => 'glusterfs',
+    options => $options,
+    ensure  => $ensure,
+  }
 
 }
 
