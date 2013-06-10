@@ -6,8 +6,13 @@
 #
 define glusterfs::peer () {
 
+  $peer_dir = $::osfamily ? {
+    debian  => '/etc/glusterd/peers',
+    default => '/var/lib/glusterd/peers'
+  }
+
   exec { "/usr/sbin/gluster peer probe ${title}":
-    unless  => "/bin/egrep '^hostname.+=${title}$' /var/lib/glusterd/peers/*",
+    unless  => "/bin/egrep '^hostname.+=${title}$' ${peer_dir}/*",
     require => Service['glusterd'],
   }
 
