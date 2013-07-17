@@ -16,10 +16,10 @@ define glusterfs::mount (
   include glusterfs::client
 
   mount { $title:
+    ensure  => $ensure,
     device  => $device,
     fstype  => 'glusterfs',
     options => $options,
-    ensure  => $ensure,
   }
 
 }
