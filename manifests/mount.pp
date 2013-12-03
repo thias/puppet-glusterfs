@@ -20,6 +20,7 @@ define glusterfs::mount (
     fstype  => 'glusterfs',
     options => $options,
     ensure  => $ensure,
+    require => Package[$::glusterfs::client::package]
   }
 
 }
