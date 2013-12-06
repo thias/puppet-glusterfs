@@ -4,7 +4,15 @@
 #
 class glusterfs::client {
 
-  package { 'glusterfs-fuse': ensure => installed }
+  $package = $::osfamily ? {
+      debian  => 'glusterfs-client',
+      default => 'glusterfs-fuse'
+  }
+
+  package { 'glusterfs-fuse':
+    ensure => installed,
+    name      => $package
+  }
 
 }
 

@@ -24,6 +24,10 @@ class glusterfs::server (
     enable    => true,
     ensure    => running,
     hasstatus => true,
+    name      => $::osfamily ? {
+      debian  => 'glusterfs-server',
+      default => 'glusterd'
+    },
     require   => Package['glusterfs-server'],
   }
 
