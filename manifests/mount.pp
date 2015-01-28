@@ -9,6 +9,7 @@
 #
 define glusterfs::mount (
   $device,
+  $path    = $name,
   $options = 'defaults,_netdev',
   $fstype  = 'glusterfs',
   $ensure  = 'mounted'
@@ -17,7 +18,7 @@ define glusterfs::mount (
   include glusterfs::client
 
   if $fstype == 'glusterfs' {
-    mount { $title:
+    mount { $path:
       ensure  => $ensure,
       device  => $device,
       fstype  => $fstype,
@@ -26,7 +27,7 @@ define glusterfs::mount (
     }
   }
   elsif $fstype == 'nfs' {
-    mount { $title:
+    mount { $path:
       ensure  => $ensure,
       device  => $device,
       fstype  => $fstype,
@@ -34,7 +35,7 @@ define glusterfs::mount (
     }
   }
   else {
-    fail("$fstype is not a valid filesystem for gluster")
+    fail("${fstype} is not a valid filesystem for gluster")
   }
 }
 
