@@ -9,13 +9,14 @@
 #
 define glusterfs::mount (
   $device,
+  $path    = $name,
   $options = 'defaults',
   $ensure  = 'mounted'
 ) {
 
   include glusterfs::client
 
-  mount { $title:
+  mount { $path:
     ensure   => $ensure,
     device   => $device,
     fstype   => 'glusterfs',
@@ -25,4 +26,3 @@ define glusterfs::mount (
   }
 
 }
-
