@@ -9,19 +9,20 @@
 #
 define glusterfs::mount (
   $device,
+  $path    = $name,
   $options = 'defaults',
   $ensure  = 'mounted'
 ) {
 
   include glusterfs::client
 
-  mount { $title:
-    ensure  => $ensure,
-    device  => $device,
-    fstype  => 'glusterfs',
-    options => $options,
-    require => Package['glusterfs-fuse'],
+  mount { $path:
+    ensure   => $ensure,
+    device   => $device,
+    fstype   => 'glusterfs',
+    options  => $options,
+    remounts => false,
+    require  => Package['glusterfs-fuse'],
   }
 
 }
-
