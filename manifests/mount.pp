@@ -9,7 +9,7 @@
 #
 define glusterfs::mount (
   $device,
-  $options = 'defaults',
+  $options = 'defaults,_netdev',
   $ensure  = 'mounted'
 ) {
 
