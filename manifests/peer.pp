@@ -6,10 +6,11 @@
 #
 define glusterfs::peer () {
 
-  exec { "/usr/sbin/gluster peer probe ${title}":
-    unless  => "/bin/egrep '^hostname.+=${title}$' /var/lib/glusterd/peers/*",
-    require => Service['glusterd'],
+  if $hostname != $title {  # No need to probe local host
+    exec { "/usr/sbin/gluster peer probe ${title}":
+      unless  => "/bin/egrep '^hostname.+=${title}$' /var/lib/glusterd/peers/*",
+      require => Service['glusterfs-server'],
+    }
   }
-
 }
 
