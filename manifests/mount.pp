@@ -25,7 +25,7 @@ define glusterfs::mount (
       require => Package['glusterfs-fuse'],
     }
   }
-  elseif $fstype == 'nfs' {
+  elsif $fstype == 'nfs' {
     mount { $title:
       ensure  => $ensure,
       device  => $device,
