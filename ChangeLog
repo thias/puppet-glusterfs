@@ -1,3 +1,7 @@
+2015-02-25 - 0.0.3.1
+* Fix bugs
+* Use ubuntu ppa for glusterfs 3.6
+
 2013-05-24 - 0.0.3
 * Update README and use markdown.
 * Change to 2-space indent.

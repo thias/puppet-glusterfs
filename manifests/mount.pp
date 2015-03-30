@@ -20,6 +20,7 @@ define glusterfs::mount (
     device  => $device,
     fstype  => 'glusterfs',
     options => $options,
+    remounts => false,
     require => Package['glusterfs-fuse'],
   }
 
