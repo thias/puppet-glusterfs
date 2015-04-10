@@ -1,0 +1,26 @@
+{
+  "name": "thias-glusterfs",
+  "version": "0.0.4",
+  "author": "Matthias Saou",
+  "summary": "GlusterFS module",
+  "description": "Install, enable and configure GlusterFS servers and clients",
+  "license": "Apache-2.0",
+  "source": "https://github.com/thias/puppet-glusterfs",
+  "project_page": "https://github.com/thias/puppet-glusterfs",
+  "issues_url": "https://github.com/thias/puppet-glusterfs/issues",
+  "dependencies": [],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu"
+    },
+    {
+      "operatingsystem": "Debian"
+    },
+    {
+      "operatingsystem": "RedHat"
+    },
+    {
+      "operatingsystem": "CentOS"
+    }
+  ]
+}
