@@ -9,19 +9,32 @@
 #
 define glusterfs::mount (
   $device,
-  $options = 'defaults',
+  $options = 'defaults,_netdev',
+  $fstype  = 'glusterfs',
   $ensure  = 'mounted'
 ) {
 
   include glusterfs::client
 
-  mount { $title:
-    ensure  => $ensure,
-    device  => $device,
-    fstype  => 'glusterfs',
-    options => $options,
-    require => Package['glusterfs-fuse'],
+  if $fstype == 'glusterfs' {
+    mount { $title:
+      ensure  => $ensure,
+      device  => $device,
+      fstype  => $fstype,
+      options => $options,
+      require => Package['glusterfs-fuse'],
+    }
   }
-
+  elsif $fstype == 'nfs' {
+    mount { $title:
+      ensure  => $ensure,
+      device  => $device,
+      fstype  => $fstype,
+      options => $options,
+    }
+  }
+  else {
+    fail("$fstype is not a valid filesystem for gluster")
+  }
 }
 
