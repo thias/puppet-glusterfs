@@ -6,7 +6,7 @@
 #
 define glusterfs::peer () {
 
-  if $hostname != $title {  # No need to probe local host
+  unless $::hostname in $title {  # No need to probe local host
     exec { "/usr/sbin/gluster peer probe ${title}":
       unless  => "/bin/egrep '^hostname.+=${title}$' /var/lib/glusterd/peers/*",
       require => Service['glusterfs-server'],
