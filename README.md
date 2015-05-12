@@ -58,6 +58,7 @@ on the same hardware for optimal performance and optimal fail-over :
 
     file { '/var/www': ensure => directory }
     glusterfs::mount { '/var/www':
+      fstype => 'glusterfs',
       device => $::hostname ? {
         'client1' => '192.168.0.1:/gv0',
         'client2' => '192.168.0.2:/gv0',

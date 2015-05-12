@@ -15,15 +15,17 @@
 #  }
 #
 class glusterfs::server (
-  $peers = []
-) {
+  $peers        = [],
+  $service_name = $::glusterfs::params::service_name,
+) inherits glusterfs::params {
 
   # Main package and service it provides
   package { 'glusterfs-server': ensure => installed }
   service { 'glusterd':
-    enable    => true,
     ensure    => running,
+    enable    => true,
     hasstatus => true,
+    name      => $service_name,
     require   => Package['glusterfs-server'],
   }
 
