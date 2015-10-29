@@ -15,11 +15,12 @@
 #  }
 #
 class glusterfs::server (
-  $peers = []
+  $peers   = [],
+  $version = 'installed'
 ) {
 
   # Main package and service it provides
-  package { 'glusterfs-server': ensure => installed }
+  package { 'glusterfs-server': ensure => $version }
   service { 'glusterd':
     enable    => true,
     ensure    => running,
@@ -31,4 +32,3 @@ class glusterfs::server (
   glusterfs::peer { $peers: }
 
 }
-
