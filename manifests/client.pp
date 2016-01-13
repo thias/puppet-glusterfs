@@ -4,7 +4,9 @@
 #
 class glusterfs::client {
 
-  package { 'glusterfs-client': ensure => installed }
+  package { 'glusterfs-client': ensure => installed,
+    require => Class['glusterfs']
+  }
 
 }
 
