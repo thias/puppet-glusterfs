@@ -42,10 +42,12 @@ service to be running :
       require => [ Exec['mkfs /dev/vg0/gv0'], File['/export/gv0'] ],
     }
     class { 'glusterfs::server':
-      peers => $::hostname ? {
+      peers   => $::hostname ? {
         'server1' => '192.168.0.2',
         'server2' => '192.168.0.1',
       },
+      # version sets ensure on the package - if not set it defaults to 'installed'
+      version => 'latest',
     }
     glusterfs::volume { 'gv0':
       create_options => 'replica 2 192.168.0.1:/export/gv0 192.168.0.2:/export/gv0',
