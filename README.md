@@ -10,7 +10,7 @@ Install, enable and configure GlusterFS.
 * `glusterfs::client` : Class to install and enable the client. Included from the mount definition.
 * `glusterfs::mount` : Definition to create client mounts.
 
-You will need to open TCP ports 24007:24009 and 38465:38466 on the servers.
+You will need to open TCP ports 24007:24008, 24009 (for version < 3.4) or 49152 (for version >= 3.4) and 38465:38467 (for GlusterFS NFS) on the servers.
 
 ## Examples
 
