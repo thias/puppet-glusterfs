@@ -37,7 +37,7 @@ class glusterfs (
 ) {
 
   $maj_min = "${major}.${minor}"
-  $url_base = "http://download.gluster.org/pub/gluster/glusterfs/${maj_min}/${maj_min}.${release}"
+  $url_base = "https://download.gluster.org/pub/gluster/glusterfs/${maj_min}/${maj_min}.${release}"
   apt::key { $gpg_key_id:
     key_source => "${url_base}/pub.key"
   } ->
