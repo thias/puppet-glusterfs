@@ -45,6 +45,16 @@ class glusterfs (
     default   => present,
   }
 
+  # Temp workaround for broken SSL cert: https://github.com/gluster/glusterfs-debian/issues/4
+  # fixed on 2017-07-11, since then present with "absent" to remove the file from all hosts
+  file { '/etc/apt/apt.conf.d/80glusterignorecert':
+    mode     => '0644',
+    content  => "Acquire::https::${download_host}::Verify-Peer \"false\";\n",
+    ensure   => $lsbdistcodename ? {
+      default => absent,
+      # 'wheezy' => present  # They fixed that already
+    }
+  } ->
   apt::key { $gpg_key_id:
     key_source => "${url_base}/pub.key",
     ensure     => $ensure,
