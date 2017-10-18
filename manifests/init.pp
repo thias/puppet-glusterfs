@@ -37,19 +37,29 @@ class glusterfs (
 ) {
 
   $maj_min = "${major}.${minor}"
-  $url_base = "https://download.gluster.org/pub/gluster/glusterfs/${maj_min}/${maj_min}.${release}"
+  $download_host = 'download.gluster.org'
+  $url_base = "https://${download_host}/pub/gluster/glusterfs/old-releases/${maj_min}/${maj_min}.${release}"
+  # GFS bug: https://github.com/gluster/glusterfs-debian/issues/11
+  $ensure = $lsbdistcodename ? {
+    'stretch' => absent,
+    default   => present,
+  }
+
   apt::key { $gpg_key_id:
-    key_source => "${url_base}/pub.key"
+    key_source => "${url_base}/pub.key",
+    ensure     => $ensure,
   } ->
   apt::source { 'gluster':
     location    => "${url_base}/Debian/${lsbdistcodename}/apt",
     release     => $lsbdistcodename,
     repos       => 'main',
     include_src => false,
+    ensure      => $ensure,
   }
   apt::pin { 'gluster':
     priority => '700',
     packages => 'gluster*',
-    codename  => $lsbdistcodename,
+    origin   => $download_host,
+    ensure   => $ensure,
   }
 }
